@@ -6,7 +6,7 @@ CREATE TABLE Auth (
   email       varchar(255), 
   password    varchar(255), 
   Useruser_id uuid NOT NULL);
-CREATE TABLE User (
+CREATE TABLE User_acc (
   user_id         uuid NOT NULL, 
   user_name       varchar(255), 
   date_of_birth   date, 
@@ -56,22 +56,22 @@ CREATE TABLE Location (
   PRIMARY KEY (location_id));
 CREATE TABLE notifications (
   Useruser_id uuid NOT NULL, 
-  id          SERIAL NOT NULL, 
+  id          int4, 
   type        varchar(255), 
   description varchar(255), 
   state       varchar(255));
 CREATE TABLE Payment (
   payment_id  SERIAL NOT NULL, 
-  method      int4 NOT NULL, 
-  value       int4 NOT NULL, 
+  method      varchar(255) NOT NULL, 
+  value       float4 NOT NULL, 
   Useruser_id uuid NOT NULL, 
   PRIMARY KEY (payment_id));
-ALTER TABLE Auth ADD CONSTRAINT FKAuth219078 FOREIGN KEY (Useruser_id) REFERENCES User (user_id);
+ALTER TABLE Auth ADD CONSTRAINT FKAuth219078 FOREIGN KEY (Useruser_id) REFERENCES User_acc (user_id);
 ALTER TABLE incident ADD CONSTRAINT FKincident615622 FOREIGN KEY (Triptrip_id) REFERENCES Trip (trip_id);
 ALTER TABLE Trip ADD CONSTRAINT FKTrip957630 FOREIGN KEY (vehicle_id) REFERENCES Vehicle (vehicle_id);
-ALTER TABLE Trip ADD CONSTRAINT FKTrip4755 FOREIGN KEY (user_id) REFERENCES User (user_id);
-ALTER TABLE notifications ADD CONSTRAINT FKnotificati83664 FOREIGN KEY (Useruser_id) REFERENCES User (user_id);
-ALTER TABLE Payment ADD CONSTRAINT FKPayment701187 FOREIGN KEY (Useruser_id) REFERENCES User (user_id);
-ALTER TABLE User ADD CONSTRAINT FKUser347743 FOREIGN KEY (Roleid) REFERENCES Role (id);
+ALTER TABLE Trip ADD CONSTRAINT FKTrip4755 FOREIGN KEY (user_id) REFERENCES User_acc (user_id);
+ALTER TABLE notifications ADD CONSTRAINT FKnotificati83664 FOREIGN KEY (Useruser_id) REFERENCES User_acc (user_id);
+ALTER TABLE Payment ADD CONSTRAINT FKPayment701187 FOREIGN KEY (Useruser_id) REFERENCES User_acc (user_id);
+ALTER TABLE User_acc ADD CONSTRAINT FKUser347743 FOREIGN KEY (Roleid) REFERENCES Role (id);
 ALTER TABLE Vehicle ADD CONSTRAINT FKVehicle82489 FOREIGN KEY (location_id) REFERENCES Location (location_id);
 ALTER TABLE Trip ADD CONSTRAINT FKTrip26466 FOREIGN KEY (location_id) REFERENCES Location (location_id);
