@@ -1,0 +1,14 @@
+CREATE (u:User{username: "admin", fullname: "Paulo Meneses", date_of_birth: "2020-09-09"}) return u
+
+CREATE (u:Vehicle{name: "abc", model: "top", brand: "xpto", startdate: datetime("2020-05-15T14:30:00"),location: [42.12312,-8.324]}) return u
+
+CREATE (l:Location {name:"Braga", coordinates:[-45.2131,-8.42341,-45.321,-8.1231,54.6324,-6.42141] }) return l
+
+Criaçao de uma viagem
+Create (t:Trip {cost: 4.05, duration: 23, coordinates: [45.1331,-4.2131,45.4123,-4.54314,45.313,-8.635],end_time: datetime("2020-05-09T15:45:38.132"), start_time: datetime("2020-05-09T15:38:38.132")})
+
+
+Query de Cypher para criação das relações no neo4j
+Match (u),(l),(v),(t) 
+Where ID(u)=0 AND ID(l)=3 AND ID(v)=1 AND ID(t)=6
+Create (u)-[m:Made]->(t),(t)-[a:At]->(l),(t)-[w:With]->(v)
