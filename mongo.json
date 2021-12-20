@@ -1,33 +1,33 @@
 {
-    "user_name": "admin",
-    "date_of_birth": "1970-04-12",
-    "fullname": "Paulo Meneses",
-    "account_balance": 20.00,
-    "role": {
-        "id": 1,
-        "type": "admin"
-    }
+  "user_name": "admin",
+  "date_of_birth": "1970-04-12",
+  "fullname": "Paulo Meneses",
+  "account_balance": 20.00,
+  "role": {
+    "id": 1,
+    "type": "admin"
+  }
 }
 
 
 {
-    "location_id": "",
-    "name": "nomea1",
-    "model": "super",
-    "brand": "xpto",
-    "autonomy": 20,
-    "startdate": "2021-04-13T14:30:00Z",
-    "hour_rate": 1.05,
-    "state": "atcive",
-    "battery_level": 100,
-    "features": {
-      "type": "Point",
-      "coordinates": [
-        45.323423,
-        -8.4324
-      ]
-    }
+  "location_id": "",
+  "name": "nomea1",
+  "model": "super",
+  "brand": "xpto",
+  "autonomy": 20,
+  "startdate": "2021-04-13T14:30:00Z",
+  "hour_rate": 1.05,
+  "state": "atcive",
+  "battery_level": 100,
+  "features": {
+    "type": "Point",
+    "coordinates": [
+      45.323423,
+      -8.4324
+    ]
   }
+}
 
 {
   "name": "BRAGA",
@@ -57,17 +57,18 @@
 }
 
 {
-    "vehicle_id": "61bc9e6d538163155768d8ac",
-    "location_id": "61bc9ef5538163155768d8b0",
-    "user_id": "61bc9d10538163155768d8a8",
-    "cost": 2.56,
-    "length": 340,
-    "duration": 12,
-    "start_time": "2021-04-13T16:30:34Z",
-    "end_time": "2021-04-13T16:42:34Z",
-    "rating": null,
-    "feedback_description": null,
-    "features": {
+  "vehicle_id": "61bc9e6d538163155768d8ac",
+  "location_id": "61bc9ef5538163155768d8b0",
+  "user_id": "61bc9d10538163155768d8a8",
+  "cost": 2.56,
+  "length": 340,
+  "duration": 12,
+  "start_time": "2021-04-13T16:30:34Z",
+  "end_time": "2021-04-13T16:42:34Z",
+  "rating": null,
+  "feedback_description": null,
+  "features": [
+    {
       "type": "LineString",
       "coordinates": [
         [
@@ -85,9 +86,10 @@
         [
           -45.32434,
           -8.3242
-        ],
+        ]
       ]
     }
+  ]
 }
 //schema for Users
 {
@@ -95,184 +97,383 @@
       bsonType: 'object',
       required: [
         'user_name'
-        ],
+    ],
       properties: {
         _id: {
           bsonType: 'objectId'
-            },
+      },
         user_name: {
           bsonType: 'string'
-            },
+      },
         date_of_birth: {
           bsonType: 'string'
-            },
+      },
         fullname: {
           bsonType: 'string'
-            },
+      },
         account_balance: {
           bsonType: 'double'
-            },
+      },
         role: {
           bsonType: 'object',
           properties: {
             id: {
               bsonType: 'int'
-                    },
+          },
             type: {
               bsonType: 'string'
-                    }
-                }
-            }
+          }
         }
+      }
     }
+  }
 }
 //schema for Location
 {
-    $jsonSchema: {
-      bsonType: 'object',
-      properties: {
-        _id: {
-          bsonType: 'objectId'
+  $jsonSchema: {
+    bsonType: 'object',
+    properties: {
+      _id: {
+        bsonType: 'objectId'
+      },
+      name: {
+        bsonType: 'string'
+      },
+      features: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            type: {
+              type: 'string'
             },
-        name: {
-          bsonType: 'string'
-            },
-        coordinates: {
-          bsonType: 'array',
-          uniqueItems: true,
-          items: {
-            bsonType: 'object',
-            properties: {
-              lat: {
-                bsonType: 'double'
-                        },
-              lon: {
-                bsonType: 'double'
-                        }
-                    }
+            coordinates: {
+              type: 'array',
+              items: {
+                type: 'array',
+                items: {
+                  type: 'array',
+                  items: {
+                    type: 'number'
+                  }
                 }
+              }
             }
+          }
         }
+      }
     }
+  }
 }
 //schema for vehicles
 {
-    $jsonSchema: {
-      bsonType: 'object',
-      required: [
-        '_id',
-        'hour_rate',
-        'battery_level',
-        'currentLocation',
-        'brand',
-        'model'
-        ],
-      properties: {
-        _id: {
-          bsonType: 'objectId'
-            },
-        name: {
-          bsonType: 'string'
-            },
-        model: {
-          bsonType: 'string'
-            },
-        brand: {
-          bsonType: 'string'
-            },
-        autonomy: {
-          bsonType: 'int'
-            },
-        startdate: {
-          bsonType: 'string'
-            },
-        hour_rate: {
-          bsonType: 'double'
-            },
-        battery_level: {
-          bsonType: 'int'
-            },
-        currentLocation: {
-          bsonType: 'object',
+  $jsonSchema: {
+    bsonType: 'object',
+    required: [
+      '_id',
+      'hour_rate',
+      'battery_level',
+      'currentLocation',
+      'brand',
+      'model'
+    ],
+    properties: {
+      _id: {
+        bsonType: 'objectId'
+      },
+      name: {
+        bsonType: 'string'
+      },
+      model: {
+        bsonType: 'string'
+      },
+      brand: {
+        bsonType: 'string'
+      },
+      autonomy: {
+        bsonType: 'int'
+      },
+      startdate: {
+        bsonType: 'string'
+      },
+      hour_rate: {
+        bsonType: 'double'
+      },
+      battery_level: {
+        bsonType: 'int'
+      },
+      features: {
+        type: 'array',
+        items: {
+          type: 'object',
           properties: {
-            lat: {
-              bsonType: 'double'
-                    },
-            lon: {
-              bsonType: 'double'
-                    }
-                }
+            type: {
+              type: 'string'
+            },
+            coordinates: {
+              type: 'array',
+              items: {
+                type: 'number'
+              }
             }
+          }
         }
+      }
     }
+  }
 }
 //schema for trip
 {
-    $jsonSchema: {
-      bsonType: 'object',
-      required: [
-        'vehicle_id',
-        'location_id',
-        'user_id',
-        'cost',
-        'length',
-        'duration'
-        ],
-      properties: {
-        _id: {
-          bsonType: 'objectId'
+  $jsonSchema: {
+    bsonType: 'object',
+    required: [
+      'vehicle_id',
+      'location_id',
+      'user_id',
+      'cost',
+      'length',
+      'duration'
+    ],
+    properties: {
+      _id: {
+        bsonType: 'objectId'
+      },
+      vehicle_id: {
+        bsonType: 'string'
+      },
+      location_id: {
+        bsonType: 'string'
+      },
+      user_id: {
+        bsonType: 'string'
+      },
+      cost: {
+        bsonType: 'double'
+      },
+      length: {
+        bsonType: 'int'
+      },
+      duration: {
+        bsonType: 'int'
+      },
+      start_time: {
+        bsonType: 'string'
+      },
+      end_time: {
+        bsonType: 'string'
+      },
+      rating: {
+        bsonType: [
+          'int',
+          'null'
+        ]
+      },
+      feedback_description: {
+        bsonType: [
+          'string',
+          'null'
+        ]
+      },
+      features: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            type: {
+              type: 'string'
             },
-        vehicle_id: {
-          bsonType: 'string'
-            },
-        location_id: {
-          bsonType: 'string'
-            },
-        user_id: {
-          bsonType: 'string'
-            },
-        cost: {
-          bsonType: 'double'
-            },
-        length: {
-          bsonType: 'int'
-            },
-        duration: {
-          bsonType: 'int'
-            },
-        start_time: {
-          bsonType: 'string'
-            },
-        end_time: {
-          bsonType: 'string'
-            },
-        rating: {
-          bsonType: [
-            'int',
-            'null'
-                ]
-            },
-        feedback_description: {
-          bsonType: [
-            'string',
-            'null'
-                ]
-            },
-        path: {
-          bsonType: 'array',
-          uniqueItems: true,
-          items: {
-            bsonType: 'object',
-            properties: {
-              lat: {
-                bsonType: 'double'
-                        },
-              lon: {
-                bsonType: 'double'
-                        }
-                    }
+            coordinates: {
+              type: 'array',
+              items: {
+                type: 'array',
+                items: {
+                  type: 'number'
                 }
+              }
             }
+          }
         }
+      }
     }
+  }
+}
+//trips Upadated
+{
+  $jsonSchema: {
+    bsonType: 'object',
+    required: [
+      'vehicle_id',
+      'location_id',
+      'user_id',
+      'cost',
+      'length',
+      'duration'
+    ],
+    properties: {
+      _id: {
+        bsonType: 'objectId'
+      },
+      vehicle_id: {
+        bsonType: 'string'
+      },
+      location_id: {
+        bsonType: 'string'
+      },
+      user_id: {
+        bsonType: 'string'
+      },
+      cost: {
+        bsonType: 'double'
+      },
+      length: {
+        bsonType: 'int'
+      },
+      duration: {
+        bsonType: 'int'
+      },
+      start_time: {
+        bsonType: 'string'
+      },
+      end_time: {
+        bsonType: 'string'
+      },
+      rating: {
+        bsonType: [
+          'int',
+          'null'
+        ]
+      },
+      feedback_description: {
+        bsonType: [
+          'string',
+          'null'
+        ]
+      },
+      incident: {
+        bsonType: 'object',
+        properties: {
+          type: {
+            bsonType: 'string'
+          },
+          description: {
+            bsonType: 'string'
+          },
+          datetime: {
+            bsonType: 'timestamp'
+          },
+          features: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                type: {
+                  type: 'string'
+                },
+                coordinates: {
+                  type: 'array',
+                  items: {
+                    type: 'number'
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      features: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            type: {
+              type: 'string'
+            },
+            coordinates: {
+              type: 'array',
+              items: {
+                type: 'array',
+                items: {
+                  bsonType: 'double'
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+//Users updated
+{
+  $jsonSchema: {
+    bsonType: 'object',
+    required: [
+      'user_name'
+    ],
+    properties: {
+      _id: {
+        bsonType: 'objectId'
+      },
+      user_name: {
+        bsonType: 'string'
+      },
+      date_of_birth: {
+        bsonType: 'string'
+      },
+      fullname: {
+        bsonType: 'string'
+      },
+      account_balance: {
+        bsonType: 'double'
+      },
+      role: {
+        bsonType: 'object',
+        properties: {
+          id: {
+            bsonType: 'int'
+          },
+          type: {
+            bsonType: 'string'
+          }
+        }
+      },
+      payment: {
+        bsonType: 'array',
+        items: {
+          bsonType: 'object',
+          properties: {
+            method: {
+              type: 'string'
+            },
+            amount: {
+              bsonType: 'double'
+            },
+            datetime: {
+              bsonType: 'timestamp'
+            }
+          }
+        }
+      },
+      notification: {
+        bsonType: 'array',
+        items: {
+          bsonType: 'object',
+          properties: {
+            type: {
+              type: 'string'
+            },
+            description: {
+              bsonType: 'string'
+            },
+            state: {
+              bsonType: 'string'
+            },
+            datetime: {
+              bsonType: 'timestamp'
+            }
+          }
+        }
+      }
+    }
+  }
 }
